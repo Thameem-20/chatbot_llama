@@ -15,6 +15,12 @@ if prompt:
     with st.chat_message("user"):
         st.write(prompt)
 
-
+    with st.spinner("Thinking..."):
+        result = ollama.chat(model="llama2", messages=[{
+            "role" : "user",
+            "content" : "prompt"
+        }])
+        response = result["message"]["content"]
+        st.write_stream(stream_data(response))
 
 
